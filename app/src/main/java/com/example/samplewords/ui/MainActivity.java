@@ -1,10 +1,11 @@
-package com.example.samplewords;
+package com.example.samplewords.ui;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.samplewords.R;
+import com.example.samplewords.ui.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
