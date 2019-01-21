@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Sample Words</string>
+    <string name="title_add_word">Add new word</string>
+    <string name="hint_add_word">Type…</string>
+    <string name="btn_positive_add_word">OK</string>
+    <string name="btn_negative_add_word">Cancel</string>
 </resources>
