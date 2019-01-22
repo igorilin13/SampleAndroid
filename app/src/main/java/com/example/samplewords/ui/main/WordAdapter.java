@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
     private final List<WordModel> wordModels = new ArrayList<>();
 
-    void setWordsModels(List<WordModel> wordsModels) {
+    void setWordModels(List<WordModel> wordModels) {
         this.wordModels.clear();
-        this.wordModels.addAll(wordsModels);
+        this.wordModels.addAll(wordModels);
         notifyDataSetChanged();
     }
 

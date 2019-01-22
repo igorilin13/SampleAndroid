@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
         WordAdapter wordAdapter = new WordAdapter();
         UiUtils.initLinearRecycler(this, wordsRecycler, wordAdapter, true);
 
-        viewModel.getWordsData().observe(this, wordAdapter::setWordsModels);
+        viewModel.getWordsData().observe(this, wordAdapter::setWordModels);
         viewModel.getAddWordSuccessEvent().observe(this, this::showAddWordSuccess);
     }
 
