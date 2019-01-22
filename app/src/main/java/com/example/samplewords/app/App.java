@@ -1,4 +1,4 @@
-package com.example.samplewords;
+package com.example.samplewords.app;
 
 import android.app.Application;
 

@@ -3,6 +3,7 @@ package com.example.samplewords.ui;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.samplewords.R;
 import com.example.samplewords.ui.base.BaseActivity;
@@ -23,6 +24,13 @@ public class MainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+        viewModel.getAddWordSuccessEvent().observe(this, this::showAddWordSuccess);
+    }
+
+    private void showAddWordSuccess(String addedWord) {
+        String text = getString(R.string.add_word_success, addedWord);
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.fab_add_word)
