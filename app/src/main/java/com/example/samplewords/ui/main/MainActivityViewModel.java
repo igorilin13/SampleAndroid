@@ -1,7 +1,8 @@
-package com.example.samplewords.ui;
+package com.example.samplewords.ui.main;
 
 import android.app.Application;
 
+import com.example.samplewords.dbg.Dbg;
 import com.example.samplewords.di.Injector;
 import com.example.samplewords.ui.util.SingleLiveEvent;
 import com.example.samplewords.word.WordInteractor;
@@ -41,11 +42,14 @@ public class MainActivityViewModel extends AndroidViewModel {
                 wordInteractor
                         .add(newWord)
                         .subscribe(() -> addWordSuccessEvent.postValue(newWord), e -> {
+                            if (Dbg.DEBUG) {
+                                Dbg.exception(e);
+                            }
                         })
         );
     }
 
-    public LiveData<List<WordModel>> getWordsData() {
+    LiveData<List<WordModel>> getWordsData() {
         return wordsData;
     }
 

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.samplewords.di.module.AppModule;
 import com.example.samplewords.di.module.WordModule;
-import com.example.samplewords.ui.MainActivityViewModel;
+import com.example.samplewords.ui.main.MainActivityViewModel;
 
 import javax.inject.Singleton;
 

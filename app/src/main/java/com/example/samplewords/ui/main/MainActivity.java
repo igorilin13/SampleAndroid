@@ -1,4 +1,4 @@
-package com.example.samplewords.ui;
+package com.example.samplewords.ui.main;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,13 +7,19 @@ import android.widget.Toast;
 
 import com.example.samplewords.R;
 import com.example.samplewords.ui.base.BaseActivity;
+import com.example.samplewords.ui.util.UiUtils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.rv_words)
+    RecyclerView wordsRecycler;
 
     private MainActivityViewModel viewModel;
 
@@ -25,6 +31,10 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
+        WordAdapter wordAdapter = new WordAdapter();
+        UiUtils.initLinearRecycler(this, wordsRecycler, wordAdapter, true);
+
+        viewModel.getWordsData().observe(this, wordAdapter::setWordsModels);
         viewModel.getAddWordSuccessEvent().observe(this, this::showAddWordSuccess);
     }
 
