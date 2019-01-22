@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Sample Words</string>
+
     <string name="title_add_word">Add new word</string>
     <string name="hint_add_word">Type…</string>
     <string name="btn_positive_add_word">OK</string>
     <string name="btn_negative_add_word">Cancel</string>
     <string name="add_word_success">Added word: %s</string>
+    <string-array name="sample_words">
+        <item>Sample word #1</item>
+        <item>Sample word #2</item>
+        <item>Sample word #3</item>
+    </string-array>
 </resources>
