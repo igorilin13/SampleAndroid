@@ -5,7 +5,8 @@ import android.app.Application;
 import com.example.samplewords.dbg.Dbg;
 import com.example.samplewords.di.Injector;
 import com.example.samplewords.ui.util.SingleLiveEvent;
-import com.example.samplewords.word.WordInteractor;
+import com.example.samplewords.word.AddWordInteractor;
+import com.example.samplewords.word.GetWordsInteractor;
 import com.example.samplewords.word.WordModel;
 
 import java.util.List;
@@ -20,7 +21,10 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivityViewModel extends AndroidViewModel {
     @Inject
-    WordInteractor wordInteractor;
+    AddWordInteractor addWordInteractor;
+
+    @Inject
+    GetWordsInteractor getWordsInteractor;
 
     private final LiveData<List<WordModel>> wordsData;
     private final SingleLiveEvent<String> addWordSuccessEvent;
@@ -31,7 +35,7 @@ public class MainActivityViewModel extends AndroidViewModel {
         super(application);
         Injector.appComponent().inject(this);
 
-        wordsData = LiveDataReactiveStreams.fromPublisher(wordInteractor.getWords());
+        wordsData = LiveDataReactiveStreams.fromPublisher(getWordsInteractor.get());
         addWordSuccessEvent = new SingleLiveEvent<>();
 
         disposables = new CompositeDisposable();
@@ -39,7 +43,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     void addWord(String newWord) {
         disposables.add(
-                wordInteractor
+                addWordInteractor
                         .add(newWord)
                         .subscribe(() -> addWordSuccessEvent.postValue(newWord), e -> {
                             if (Dbg.DEBUG) {

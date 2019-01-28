@@ -3,8 +3,9 @@ package com.example.samplewords.di.module;
 import android.content.Context;
 
 import com.example.samplewords.app.AppDatabase;
+import com.example.samplewords.word.AddWordInteractor;
+import com.example.samplewords.word.GetWordsInteractor;
 import com.example.samplewords.word.WordDao;
-import com.example.samplewords.word.WordInteractor;
 
 import javax.inject.Singleton;
 
@@ -21,7 +22,13 @@ public class WordModule {
 
     @Singleton
     @Provides
-    static WordInteractor wordInteractor(Context context, WordDao wordDao) {
-        return new WordInteractor(context, wordDao);
+    static GetWordsInteractor getWordsInteractor(Context context, WordDao wordDao) {
+        return new GetWordsInteractor(context, wordDao);
+    }
+
+    @Singleton
+    @Provides
+    static AddWordInteractor addWordInteractor(WordDao wordDao) {
+        return new AddWordInteractor(wordDao);
     }
 }

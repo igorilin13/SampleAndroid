@@ -20,16 +20,14 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import io.reactivex.Flowable;
 
 import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
-public class WordInteractorTest {
+public class GetWordsInteractorTest {
     @Mock
     WordDao wordDao;
 
-    private WordInteractor wordInteractor;
+    private GetWordsInteractor getWordsInteractor;
     private List<WordModel> expectedSampleWords;
 
     @Before
@@ -38,7 +36,7 @@ public class WordInteractorTest {
 
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         expectedSampleWords = createSampleWords(context);
-        wordInteractor = new WordInteractor(context, wordDao);
+        getWordsInteractor = new GetWordsInteractor(context, wordDao);
     }
 
     private List<WordModel> createSampleWords(Context context) {
@@ -50,43 +48,6 @@ public class WordInteractorTest {
         }
 
         return models;
-    }
-
-    @Test
-    public void testEmptyWord() throws InterruptedException {
-        verifyEmptyWord(null);
-        verifyEmptyWord("");
-        verifyEmptyWord("   \t\n    ");
-    }
-
-    private void verifyEmptyWord(String word) throws InterruptedException {
-        wordInteractor
-                .add(word)
-                .test()
-                .await()
-                .assertError(IllegalArgumentException.class);
-
-        verifyNoMoreInteractions(wordDao);
-    }
-
-    @Test
-    public void testAddSingleWord() throws InterruptedException {
-        verifyAddWordSuccess("Hello", "Hello");
-    }
-
-    @Test
-    public void testAddSentence() throws InterruptedException {
-        verifyAddWordSuccess("Thisisasentence", " This is a sentence ");
-    }
-
-    private void verifyAddWordSuccess(String expected, String input) throws InterruptedException {
-        wordInteractor
-                .add(input)
-                .test()
-                .await()
-                .assertComplete();
-
-        verify(wordDao, only()).insert(new WordModel(expected));
     }
 
     @Test
@@ -116,8 +77,8 @@ public class WordInteractorTest {
     }
 
     private void verifyGetWords(List<WordModel> expected) {
-        wordInteractor
-                .getWords()
+        getWordsInteractor
+                .get()
                 .test()
                 .assertValue(expected);
 
